@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "build": "webpack -p"
+    "start": "npm run build && node .",
+    "test": "node .",
+    "build": "webpack --config ./webpack.deployment.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
