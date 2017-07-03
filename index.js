@@ -15,7 +15,18 @@ throng({
   hbs = require("hbs"),
   app = express(),
   http = require("http"),
-  server = http.createServer(app);
+  server = http.createServer(app),
+  passport = require("passport"),
+  twitchStrategy = require("passport-twitch").Strategy;
+
+  passport.use(new twitchStrategy({
+    clientID: "",
+    clientSecret: "",
+    callbackURL: "http://localhost:3000/auth/twitch/callback",
+    scope: "user_read"
+  }, (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
+  }));
 
   if (!isProduction) {
     const webpack = require('webpack'),
@@ -51,6 +62,13 @@ throng({
     res.locals.title = app.locals.title;
     next();
   });
+
+  app.get("/auth/twitch", passport.authenticate("twitch"));
+  app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), (req, res) => {
+    // Successful authentication, redirect home.
+    console.log("Hello World!");
+    res.redirect("/");
+});
 
   app.get("/", (req,res) => {
     res.render("index", {

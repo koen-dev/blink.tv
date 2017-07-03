@@ -42,6 +42,9 @@
     "express": "^4.15.3",
     "hbs": "^4.0.1",
     "normalize.css": "^7.0.0",
+    "passport": "0.3.2",
+    "passport-twitch": "1.0.3",
+    "prop-types": "15.5.10",
     "throng": "^4.0.0"
   }
 }

@@ -1,1 +1,45 @@
 @import "~normalize.css/normalize.css";
+@import "variables";
+
+html{
+  height: 100%;
+}
+body, #main, #app{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.loader{
+  position: fixed;
+  margin-top: 0;
+  z-index: 9;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, #e757a8, #7429ec);
+  background-size: 400% 400%;
+  -webkit-animation: gradientbareffect 6s ease infinite;
+  -moz-animation: gradientbareffect 6s ease infinite;
+  animation: gradientbareffect 6s ease infinite;
+}
+
+button{
+  border: none;
+  white-space: nowrap;
+  font-size: 1.2em;
+  line-height: 3em;
+  padding: 0 0.8em;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+  transition: background .12s ease-in,color .12s ease-in,box-shadow .12s ease-in;
+  &.twitch{
+    background-color: #6441a4;
+    color: white;
+    &:hover,&:focus{
+      background-color: #7d5bbe;
+    }
+  }
+}

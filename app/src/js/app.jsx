@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import DOMinator from './DOMinator';
+import {fetchJson, sleep} from './Helper';
+import ConnectTwitch from './ConnectTwitch';
 
 import "../css/style.scss";
+
 
 class App extends React.Component {
   constructor(props){
@@ -9,20 +14,21 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    // Executed after the node is inserted into the DOM
-    document.getElementById("loader").style.display = "none";
+    document.getElementById("app").removeClass("loader");
+  }
+
+  componentWillUnmount(){
+    document.getElementById("app").addClass("loader");
   }
 
   render(){
     return(
-      <div>
-        <h1>Hello World!</h1>
-      </div>
+      <ConnectTwitch />
     )
   }
 }
 
 ReactDOM.render(
-  <App />,
+  <App/>,
   document.getElementById("app")
 );
