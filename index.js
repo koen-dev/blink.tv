@@ -8,23 +8,22 @@ throng({
   workers: concurrency,
   lifetime: Infinity
 }, () => {
-  var compression = require("compression"),
-  packageInfo     = require("./package.json"),
-  express         = require("express"),
-  mongoose        = require("mongoose"),
-  bodyParser      = require("body-parser"),
-  hbs             = require("hbs"),
+  var express     = require("express"),
   app             = express(),
+  bodyParser      = require("body-parser"),
+  session         = require("express-session"),
+  cookieParser    = require("cookie-parser"),
+  packageInfo     = require("./package.json"),
+  mongoose        = require("mongoose"),
+  hbs             = require("hbs"),
   http            = require("http"),
   server          = http.createServer(app),
-  cookieParser    = require("cookie-parser"),
-  cookieSession   = require("cookie-session"),
   passport        = require("passport"),
   twitchStrategy  = require("passport-twitch").Strategy,
   auth            = require("./app/routes/auth");
 
   function loggedIn(req, res, next) {
-    if (req.user) {
+    if (req.isAuthenticated()) {
       next();
     } else {
       res.redirect('/');
@@ -35,23 +34,22 @@ throng({
   mongoose.connect(process.env.MONGODB_URL);
 
   // Middlewares
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(compression());
+  app.use("/app/dist", express.static(path.resolve(__dirname, "app/dist")));
   app.use(cookieParser());
-  app.use(cookieSession({secret: "somesecrettokenhere"}));
+  app.use(bodyParser.json());
+  app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use("/app/dist", express.static(path.resolve(__dirname, "app/dist")));
+
   // Routers
   app.use("/auth", auth);
-  //app.use(bodyParser.json());
 
   var User = require('./app/models/user');
 
   passport.use(new twitchStrategy({
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: "https://blinktv.herokuapp.com/auth/twitch/callback",
+    callbackURL: process.env.TWITCH_CALLBACK_URL,
     scope: "user_read"
   }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
@@ -107,17 +105,15 @@ throng({
   app.get("*", (req, res, next) => {
     // Set response locals here for usage across all get calls
     res.locals.title = app.locals.title;
+    console.log(req.isAuthenticated());
+    res.locals.isLoggedIn = (req.isAuthenticated()) ? true : false;
     next();
   });
 
   app.get("/", (req, res) => {
-    if (req.user) {
-      res.redirect("/portal");
-    }else{
-      res.render("index", {
-        defaults: res.locals
-      });
-    }
+    res.render("index", {
+      defaults: res.locals
+    });
   });
 
   app.get("/portal", loggedIn, (req, res) => {

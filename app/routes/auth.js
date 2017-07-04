@@ -10,4 +10,9 @@ router.get("/twitch/success", (req, res) => {
   res.render("success");
 });
 
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.json({"ErrorOccured": false});
+});
+
 module.exports = router;
