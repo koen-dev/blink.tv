@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node .",
-    "test": "node .",
+    "dev": "node .",
+    "test": "node . &",
     "build": "webpack --config ./webpack.deployment.config.js --progress --colors"
   },
   "repository": {

@@ -1,5 +1,6 @@
 # Production
 app/dist
+.env
 
 # Logs
 logs
