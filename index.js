@@ -49,8 +49,8 @@ throng({
   var User = require('./app/models/user');
 
   passport.use(new twitchStrategy({
-    clientID: "",
-    clientSecret: "",
+    clientID: process.env.TWITCH_CLIENT_ID,
+    clientSecret: process.env.TWITCH_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/twitch/callback",
     scope: "user_read"
   }, (accessToken, refreshToken, profile, done) => {
