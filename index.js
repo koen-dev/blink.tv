@@ -32,7 +32,7 @@ throng({
   }
 
   var configDB = require('./config/database.js');
-  mongoose.connect(process.env.MONGODB_URL || configDB.url);
+  mongoose.connect(process.env.MONGODB_URL);
 
   // Middlewares
   app.use(bodyParser.urlencoded({ extended: true }));
