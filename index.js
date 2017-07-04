@@ -51,7 +51,7 @@ throng({
   passport.use(new twitchStrategy({
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/twitch/callback",
+    callbackURL: "https://blinktv.herokuapp.com/auth/twitch/callback",
     scope: "user_read"
   }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
