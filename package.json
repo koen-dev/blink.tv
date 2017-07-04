@@ -7,7 +7,8 @@
     "start": "npm run build && node .",
     "dev": "node .",
     "test": "node . &",
-    "build": "webpack --config ./webpack.deployment.config.js --progress --colors"
+    "build": "webpack --config ./webpack.deployment.config.js --progress --colors",
+    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
