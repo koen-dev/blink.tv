@@ -15,6 +15,9 @@ class App extends React.Component {
 
   componentDidMount(){
     document.getElementById("app").removeClass("loader");
+    window.success = function(){
+      location.reload();
+    }
   }
 
   componentWillUnmount(){

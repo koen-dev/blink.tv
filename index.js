@@ -9,15 +9,44 @@ throng({
   lifetime: Infinity
 }, () => {
   var compression = require("compression"),
-  packageInfo = require("./package.json"),
-  express = require("express"),
-  bodyParser = require("body-parser"),
-  hbs = require("hbs"),
-  app = express(),
-  http = require("http"),
-  server = http.createServer(app),
-  passport = require("passport"),
-  twitchStrategy = require("passport-twitch").Strategy;
+  packageInfo     = require("./package.json"),
+  express         = require("express"),
+  mongoose        = require("mongoose"),
+  bodyParser      = require("body-parser"),
+  hbs             = require("hbs"),
+  app             = express(),
+  http            = require("http"),
+  server          = http.createServer(app),
+  cookieParser    = require("cookie-parser"),
+  cookieSession   = require("cookie-session"),
+  passport        = require("passport"),
+  twitchStrategy  = require("passport-twitch").Strategy,
+  auth            = require("./app/routes/auth");
+
+  function loggedIn(req, res, next) {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  }
+
+  var configDB = require('./config/database.js');
+  mongoose.connect(configDB.url);
+
+  // Middlewares
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(compression());
+  app.use(cookieParser());
+  app.use(cookieSession({secret: "somesecrettokenhere"}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use("/app/dist", express.static(path.resolve(__dirname, "app/dist")));
+  // Routers
+  app.use("/auth", auth);
+  //app.use(bodyParser.json());
+
+  var User = require('./app/models/user');
 
   passport.use(new twitchStrategy({
     clientID: "",
@@ -25,7 +54,23 @@ throng({
     callbackURL: "http://localhost:3000/auth/twitch/callback",
     scope: "user_read"
   }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
+    User.findOne({
+      twitchId: profile.id
+    }, (err, user) => {
+      if (err) return done(err);
+      if (!user) {
+        user = new User({
+          twitchId: profile.id,
+          displayName: profile.displayName
+        });
+        user.save((err) => {
+          if (err) console.log(err);
+          return done(err, user);
+        });
+      }else{
+        return done(err, user);
+      }
+    });
   }));
 
   if (!isProduction) {
@@ -44,17 +89,19 @@ throng({
 
   app.locals.title = packageInfo.name;
 
-  app.use(compression());
   app.set("view engine", "hbs");
   app.set("views", path.resolve(__dirname, "app/views"));
 
-  app.use("/app/dist", express.static(path.resolve(__dirname, "app/dist")));
-
-  app.use(bodyParser.json());
-
   hbs.registerPartials(path.resolve(__dirname,"app/views/partials"));
-  hbs.registerHelper("currentYear", () => {
-    return new Date().getFullYear();
+
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+      done(err, user);
+    });
   });
 
   app.get("*", (req, res, next) => {
@@ -63,17 +110,23 @@ throng({
     next();
   });
 
-  app.get("/auth/twitch", passport.authenticate("twitch"));
-  app.get("/auth/twitch/callback", passport.authenticate("twitch", { failureRedirect: "/" }), (req, res) => {
-    // Successful authentication, redirect home.
-    console.log("Hello World!");
-    res.redirect("/");
-});
+  app.get("/", (req, res) => {
+    if (req.user) {
+      res.redirect("/portal");
+    }else{
+      res.render("index", {
+        defaults: res.locals
+      });
+    }
+  });
 
-  app.get("/", (req,res) => {
-    res.render("index", {
-      defaults: res.locals,
-      container: "container-fluid"
+  app.get("/portal", loggedIn, (req, res) => {
+    User.findById(req.user._id, (err, user) => {
+      if (err) res.redirect('/');
+      res.render("portal", {
+        defaults: res.locals,
+        user: user
+      });
     });
   });
 
