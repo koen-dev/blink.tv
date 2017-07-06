@@ -12,7 +12,7 @@ export class LoginTwitch extends React.Component{
 
   render(){
     return(
-      <button onClick={this.openPopup} className="twitch">Connect with Twitch</button>
+      <button onClick={this.openPopup} className="twitch">Login with Twitch</button>
     )
   }
 }

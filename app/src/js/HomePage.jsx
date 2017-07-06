@@ -1,0 +1,57 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {LoginTwitch} from './Twitch.jsx';
+
+export default class HomePage extends React.Component {
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <div>
+        <header>
+          <div className="logo-wrapper">
+            <div className="logo"></div>
+          </div>
+          <ul className="menu">
+            <li><LoginTwitch/></li>
+          </ul>
+        </header>
+        <Spinner imageProvider="http://via.placeholder.com/1920x350"/>
+        <div className="main"></div>
+        <footer></footer>
+      </div>
+    )
+  }
+}
+
+export class Spinner extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      imageProvider: this.props.imageProvider
+    };
+  }
+
+  componentDidMount(){
+    /*setInterval(() => {
+      var imageUrl = `${this.props.imageProvider}?${new Date().getTime()}`;
+
+      fetch(imageUrl)
+        .then(() => {
+          this.setState({imageProvider: imageUrl})
+        });
+    }, 5000);*/
+  }
+
+  render(){
+    var background = {
+      backgroundImage: `url(${this.state.imageProvider})`
+    }
+    return(
+      <div className="spinner" style={background}></div>
+    )
+  }
+}

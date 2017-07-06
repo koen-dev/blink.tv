@@ -105,7 +105,6 @@ throng({
   app.get("*", (req, res, next) => {
     // Set response locals here for usage across all get calls
     res.locals.title = app.locals.title;
-    console.log(req.isAuthenticated());
     res.locals.isLoggedIn = (req.isAuthenticated()) ? true : false;
     next();
   });

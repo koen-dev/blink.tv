@@ -1,15 +1,8 @@
 @import "~normalize.css/normalize.css";
 @import "variables";
 
-html{
-  height: 100%;
-}
-body, #main, #app{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+html, body{
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .loader{
@@ -26,6 +19,7 @@ body, #main, #app{
 }
 
 button{
+  font-family: 'Source Sans Pro', sans-serif;
   border: none;
   white-space: nowrap;
   font-size: 1.2em;
@@ -34,12 +28,70 @@ button{
   font-size: 12px;
   cursor: pointer;
   outline: none;
+  border-radius: 5px;
   transition: background .12s ease-in,color .12s ease-in,box-shadow .12s ease-in;
   &.twitch{
-    background-color: #6441a4;
+    background-color: #6441A4;
     color: white;
+    position: relative;
+    padding-left: 3em;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0.5em;
+      left: 0.5em;
+      height: 2em;
+      width: 2em;
+      background-image: url("../images/Glitch_White_RGB.svg");
+      background-size: 100% 100%;
+      float: left;
+    }
     &:hover,&:focus{
       background-color: #7d5bbe;
     }
   }
+}
+
+header{
+  width: 100%;
+  text-align: center;
+  padding: 0 0 1em 0;
+  .logo-wrapper{
+    padding: 3em 0 0 0;
+    width: 100%;
+    .logo{
+      border-radius: 50%;
+      background-color: #C3C8CC;
+      background-image: url(http://via.placeholder.com/100x100);
+      background-size: cover;
+      background-position: 50% 50%;
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+    }
+  }
+  ul{
+    list-style: none;
+    padding: 0;
+    li{
+
+    }
+  }
+}
+
+.spinner{
+  width: 100%;
+  min-height: 350px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-color: #C3C8CC;
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #C3C8CC;
+  min-height: 150px;
 }

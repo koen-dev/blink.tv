@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import DOMinator from './DOMinator';
 import {fetchJson, sleep} from './Helper';
 import {LoginTwitch, LogoutTwitch} from './Twitch.jsx';
+import HomePage from './HomePage.jsx';
+import DashBoard from './DashBoard.jsx';
 
 import "../css/style.scss";
 
@@ -16,14 +18,12 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    document.getElementById("app").removeClass("loader");
     window.success = () => {
       this.setState({ isLoggedIn: true });
     }
   }
 
   componentWillUnmount(){
-    document.getElementById("app").addClass("loader");
   }
 
   login(){
@@ -41,15 +41,15 @@ class App extends React.Component {
 
   render(){
     const isLoggedIn = this.state.isLoggedIn;
-    let button = null;
+    let page = null;
     if (isLoggedIn) {
-      button = <LogoutTwitch onLogout={this.logout}/>;
+      page = <DashBoard onLogout={this.logout}/>;//<LogoutTwitch onLogout={this.logout}/>;
     } else {
-      button = <LoginTwitch/>;
+      page = <HomePage/>;//<LoginTwitch/>;
     }
     return(
       <div>
-        {button}
+        {page}
       </div>
     )
   }
