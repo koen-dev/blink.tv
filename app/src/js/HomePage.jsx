@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {LoginTwitch} from './Twitch.jsx';
 
+import "../css/HomePage.scss";
+
 export default class HomePage extends React.Component {
   constructor(props){
     super(props)
@@ -9,7 +11,7 @@ export default class HomePage extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id="homepage">
         <header>
           <div className="logo-wrapper">
             <div className="logo"></div>

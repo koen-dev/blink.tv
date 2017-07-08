@@ -48,6 +48,23 @@ export class DOMinator{
 
       tick();
     }
+
+    HTMLElement.prototype.is = function(elem, checkChildren = false){
+      var target = this;
+      var result = false;
+
+      result = (target === elem);
+
+      if (checkChildren) {
+        for (var i = 0; i < elem.children.length; i++) {
+          if (elem.children[i] === target) {
+            result = true;
+          }
+        }
+      }
+
+      return result;
+    }
   }
 }
 
