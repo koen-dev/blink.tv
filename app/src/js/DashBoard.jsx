@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {LogoutTwitch} from './Twitch.jsx';
+import Settings from './DashBoard/Settings.jsx';
+import CurrentSong from './DashBoard/CurrentSong.jsx';
 import {fetchJson} from './Helper';
+
 
 import "../css/DashBoard.scss";
 
@@ -59,6 +60,10 @@ export default class DashBoard extends React.Component {
             </ul>
           </div>
         </header>
+        <div id="container">
+          <Settings/>
+          <CurrentSong/>
+        </div>
       </div>
     )
   }

@@ -1,6 +1,6 @@
 var express = require("express"),
 router      = express.Router(),
-User        = require('./../models/user');
+User        = require('../models/user');
 
 router.get("/profile", (req, res) => {
   if(!req.isAuthenticated()) return;

@@ -9,6 +9,7 @@
       width: auto;
       height: 60px;
       line-height: 60px;
+      padding: 0 20px 0 10px;
       .icon-wrapper{
         cursor: pointer;
         display: inline-block;
@@ -18,7 +19,7 @@
           display: inline-block;
           border-radius: 50%;
           height: 40px;
-          margin: 10px 10px;
+          margin: 10px;
         }
         .status{
           position: absolute;
@@ -42,7 +43,7 @@
       display: none;
       position: absolute;
       top: 40px;
-      right: 15px;
+      right: 35px;
       background: white;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       border-radius: 3px;
@@ -74,6 +75,27 @@
           }
         }
       }
+    }
+  }
+
+  #container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+
+    .widget{
+      flex-grow: 1;
+      background-color: white;
+      border-radius: 3px;
+      min-height: 250px;
+      margin: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #container {
+      display: block;
+      padding: 10px;
     }
   }
 }
