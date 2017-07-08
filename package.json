@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Koen028/blink.tv#readme",
   "engines": {
     "node": "6.10.3",
-    "npm": "5.0.4"
+    "npm": "5.1.0"
   },
   "dependencies": {
     "babel-core": "^6.25.0",
