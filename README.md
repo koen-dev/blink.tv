@@ -21,6 +21,8 @@ TWITCH_CLIENT_SECRET=extremelysecretkeyfortwitch
 MONGODB_URL=mongodb://user:pass@localhost:49132/dbname
 TWITCH_CALLBACK_URL=http://localhost:3000/auth/twitch/callback
 ```
+This project uses Foreman to run locally.  
+Please install [Foreman](https://www.npmjs.com/package/foreman) globally `npm i -g foreman`
 
 ## License
 
