@@ -1,8 +1,8 @@
 import React from 'react';
 import Settings from './DashBoard/Settings.jsx';
 import CurrentSong from './DashBoard/CurrentSong.jsx';
+import Stats from './DashBoard/Stats.jsx';
 import {fetchJson} from './Helper';
-
 
 import "../css/DashBoard.scss";
 
@@ -10,7 +10,12 @@ export default class DashBoard extends React.Component {
   constructor(props){
     super(props)
     this.logout = this.logout.bind(this);
-    this.state = { displayName: "", logo: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="};
+    this.state = {
+      displayName: "",
+      logo: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
+      token: "",
+      userId: ""
+    };
   }
 
   componentDidMount(){
@@ -19,7 +24,9 @@ export default class DashBoard extends React.Component {
         if (!res.ErrorOccured) {
           this.setState({
             displayName: res.User.displayName,
-            logo: res.User.logo
+            logo: res.User.logo,
+            token: res.User.token,
+            userId: res.User.twitchId
           });
         }
       });
@@ -44,6 +51,11 @@ export default class DashBoard extends React.Component {
   }
 
   render(){
+    var widgets = null;
+    if (this.state.token != "") {
+      widgets = <Stats token={this.state.token} userId={this.state.userId}/>;
+    }
+
     return(
       <div id="dashboard">
         <header>
@@ -61,8 +73,7 @@ export default class DashBoard extends React.Component {
           </div>
         </header>
         <div id="container">
-          <Settings/>
-          <CurrentSong/>
+          {widgets}
         </div>
       </div>
     )

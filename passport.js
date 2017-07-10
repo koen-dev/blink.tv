@@ -10,7 +10,7 @@ module.exports = function(app){
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
     callbackURL: process.env.TWITCH_CALLBACK_URL,
-    scope: "user_read"
+    scope: ["user_read", "channel_read", "channel_subscriptions"]
   }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
       twitchId: profile.id
@@ -21,7 +21,8 @@ module.exports = function(app){
           twitchId: profile.id,
           displayName: profile.displayName,
           logo: profile._json.logo,
-          updated_at: profile._json.updated_at
+          updated_at: profile._json.updated_at,
+          token: accessToken
         });
         user.save((err) => {
           if (err) console.log(err);
