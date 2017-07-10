@@ -8,7 +8,7 @@ export default class Settings extends React.Component{
 
   render(){
     return(
-      <div className="widget">
+      <div id="settings" className="widget">
       </div>
     )
   }

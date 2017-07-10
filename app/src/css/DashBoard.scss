@@ -88,7 +88,6 @@
 
     .widget{
       @include dropshadow(1);
-      flex-grow: 1;
       background-color: white;
       border-radius: 3px;
       min-height: 250px;
@@ -101,5 +100,51 @@
       display: block;
       padding: 10px;
     }
+  }
+
+  #follows{
+    .info{
+      padding: 10px 20px;
+      font-size: 24px;
+      border-bottom: 1px solid lighten(#F4F5F7, 0);
+    }
+    .userList{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      min-width: 350px;
+      li{
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+        cursor: pointer;
+        transition: background-color .15s ease;
+        .icon-wrapper{
+          float: left;
+          margin-right: 10px;
+          height: 50px;
+          .icon{
+            display: inline-block;
+            border-radius: 50%;
+            height: 40px;
+            margin: 5px;
+          }
+        }
+        .displayName{
+          float: left;
+        }
+        .date{
+          float: right;
+        }
+        &:hover,
+        &:focus{
+          background-color: darken(white, 5);
+        }
+      }
+    }
+  }
+
+  #settings{
+    
   }
 }
