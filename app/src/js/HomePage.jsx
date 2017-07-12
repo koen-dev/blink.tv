@@ -20,7 +20,7 @@ export default class HomePage extends React.Component {
             <li><LoginTwitch/></li>
           </ul>
         </header>
-        <Spinner imageProvider="http://via.placeholder.com/1920x350"/>
+        <Spinner imageProvider="https://unsplash.it/1920/350"/>
         <div className="main"></div>
         <footer></footer>
       </div>
@@ -32,9 +32,9 @@ export class Spinner extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
+    /*this.state = {
       imageProvider: this.props.imageProvider
-    };
+    };*/
   }
 
   componentDidMount(){
@@ -49,11 +49,11 @@ export class Spinner extends React.Component {
   }
 
   render(){
-    var background = {
+    /*var background = {
       backgroundImage: `url(${this.state.imageProvider})`
-    }
+    }*/
     return(
-      <div className="spinner" style={background}></div>
+      <div className="spinner"></div>
     )
   }
 }

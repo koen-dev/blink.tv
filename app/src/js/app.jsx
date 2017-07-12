@@ -9,7 +9,6 @@ import DashBoard from './DashBoard.jsx';
 
 import "../css/style.scss";
 
-
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -40,18 +39,11 @@ class App extends React.Component {
   }
 
   render(){
-    const isLoggedIn = this.state.isLoggedIn;
-    let page = null;
-    if (isLoggedIn) {
-      page = <DashBoard onLogout={this.logout}/>;//<LogoutTwitch onLogout={this.logout}/>;
+    if (this.state.isLoggedIn) {
+      return <DashBoard onLogout={this.logout}/>;
     } else {
-      page = <HomePage/>;//<LoginTwitch/>;
+      return <HomePage/>;
     }
-    return(
-      <div>
-        {page}
-      </div>
-    )
   }
 }
 
