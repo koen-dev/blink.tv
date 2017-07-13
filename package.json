@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "dev:start": "nf start",
-    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors"
+    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --display-error-details --progress --colors"
   },
   "repository": {
     "type": "git",
