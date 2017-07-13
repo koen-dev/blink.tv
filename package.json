@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Koen028/blink.tv.git"
   },
-  "author": "",
+  "author": "Koen Hendriks <koen@expandyourworld.nl> (http://expandyourworld.nl/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Koen028/blink.tv/issues"
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Koen028/blink.tv#readme",
   "engines": {
     "node": "6.10.3",
-    "npm": "5.1.0"
+    "npm": "5.2.0"
   },
   "dependencies": {
     "babel-core": "^6.25.0",
