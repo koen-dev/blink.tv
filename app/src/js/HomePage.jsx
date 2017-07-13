@@ -45,7 +45,7 @@ export class Spinner extends React.Component {
         .then(() => {
           this.setState({imageProvider: imageUrl})
         });
-    }, 5000);*/
+    }, 60000);*/
   }
 
   render(){

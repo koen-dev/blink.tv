@@ -1,4 +1,5 @@
 import React from 'react';
+import UserInfo from './DashBoard/UserInfo.jsx';
 import Settings from './DashBoard/Settings.jsx';
 import CurrentSong from './DashBoard/CurrentSong.jsx';
 import Follows from './DashBoard/Follows.jsx';
@@ -16,7 +17,8 @@ export default class DashBoard extends React.Component {
       logo: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
       token: "",
       followsLink: "",
-      subsLink: ""
+      subsLink: "",
+      channelData: null
     };
   }
 
@@ -38,7 +40,8 @@ export default class DashBoard extends React.Component {
                 displayName: res.display_name,
                 logo: res.logo,
                 followsLink: res._links.follows,
-                subsLink: res._links.subscriptions
+                subsLink: res._links.subscriptions,
+                channelData: res
               });
             });
         }
@@ -67,6 +70,7 @@ export default class DashBoard extends React.Component {
     if (this.state.hasData) {
       return(
         <div id="container">
+          <UserInfo token={this.state.token} channel={this.state.channelData}/>
           <Follows token={this.state.token} link={this.state.followsLink} limit="10"/>
           <Settings/>
         </div>

@@ -144,7 +144,46 @@
     }
   }
 
-  #settings{
-    
+  #userinfo{
+    text-align: center;
+    min-width: 250px;
+    .banner{
+      background-size: cover;
+      background-position: 50% 50%;
+      height: 150px;
+      position: relative;
+      margin-bottom: 50px;
+      .icon{
+        background-size: cover;
+        background-position: 50% 50%;
+        height: 80px;
+        width: 80px;
+        border-radius: 5px;
+        position: absolute;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 100px;
+      }
+    }
+    .info-list{
+      text-align: left;
+      list-style: none;
+      padding: 0 25px;
+      margin: 0;
+      li{
+        font-style: italic;
+        margin: 10px 0;
+        span{
+          font-style: normal;
+          font-weight: bold;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .widget{
+    overflow: hidden;
   }
 }
