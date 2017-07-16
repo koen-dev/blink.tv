@@ -39,6 +39,10 @@ class TwitchAPI {
   getFollowers(userId = this.userId, limit = 10){
     return this.fetchJson(`channels/${userId}/follows?limit=${limit}`);
   }
+
+  getUserId(username){
+    return this.fetchJson(`users?login=${username}`);
+  }
 }
 
 export default new TwitchAPI();

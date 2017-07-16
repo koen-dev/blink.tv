@@ -3,7 +3,10 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "app/src/js/App.jsx"),
+  entry: {
+    app: path.resolve(__dirname, "app/src/js/App.jsx"),
+    vendor: ["react", "react-dom", "moment", "prop-types"]
+  },
   output: {
     path: path.resolve(__dirname, "app/dist"),
     filename: 'bundle.js',
@@ -64,6 +67,7 @@ module.exports = {
       compress: {
         warnings: false
       }
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.bundle.js"})
   ]
 };

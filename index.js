@@ -61,6 +61,7 @@ throng({
   app.use("/", require("./app/routes/root"));
   app.use("/auth", require("./app/routes/auth"));
   app.use("/api", require("./app/routes/api"));
+  app.use("/users", require("./app/routes/users"));
 
   server.listen(port, () => {
     console.log(`${app.locals.title} is listening on port ${port}`);
