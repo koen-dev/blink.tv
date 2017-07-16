@@ -54,6 +54,11 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
