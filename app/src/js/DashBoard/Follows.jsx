@@ -1,6 +1,7 @@
 import React from 'react';
 import {fetchJson} from '../Helper';
 import moment from 'moment';
+import TwitchAPI from '../TwitchApiHelper';
 
 export default class Follows extends React.Component{
   constructor(props){
@@ -18,10 +19,7 @@ export default class Follows extends React.Component{
   }
 
   updateFollowers(){
-    var headers = new Headers({
-      "Authorization": `OAuth ${this.props.token}`
-    });
-    fetchJson(`${this.props.link}?limit=${this.props.limit}`, {headers: headers})
+    TwitchAPI.getFollowers()
       .then((res) => {
         this.setState({
           total: res._total,

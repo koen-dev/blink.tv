@@ -11,7 +11,7 @@ export default class FollowerAlert extends React.Component{
   render(){
     return(
       <div id="" className="widget">
-        <div className="info">Recent follows</div>
+        <div className="info">Follower Alert</div>
       </div>
     );
   }

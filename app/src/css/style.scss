@@ -9,6 +9,10 @@ html, body{
   height: 100%;
 }
 
+#{headings()}{
+  font-weight: 400;
+}
+
 #app{
   height: 100%;
 }

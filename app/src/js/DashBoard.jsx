@@ -4,6 +4,7 @@ import Settings from './DashBoard/Settings.jsx';
 import CurrentSong from './DashBoard/CurrentSong.jsx';
 import Follows from './DashBoard/Follows.jsx';
 import {fetchJson} from './Helper';
+import TwitchAPI from './TwitchApiHelper';
 
 import "../css/DashBoard.scss";
 
@@ -16,9 +17,9 @@ export default class DashBoard extends React.Component {
       displayName: "",
       logo: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
       token: "",
-      followsLink: "",
-      subsLink: "",
-      channelData: null
+      userId: "",
+      channelData: null,
+      isStreaming: false
     };
   }
 
@@ -26,23 +27,21 @@ export default class DashBoard extends React.Component {
     fetchJson("/api/profile", { credentials: 'same-origin' })
       .then((res) => {
         if (!res.ErrorOccured) {
-          this.setState({
-            token: res.User.token
-          });
-          var headers = new Headers({
-            "Authorization": `OAuth ${res.User.token}`
-          });
-
-          fetchJson('https://api.twitch.tv/kraken/channel', {headers: headers})
+          TwitchAPI.setToken(res.User.token);
+          TwitchAPI.getChannel()
             .then((res) => {
-              this.setState({
-                hasData: true,
-                displayName: res.display_name,
-                logo: res.logo,
-                followsLink: res._links.follows,
-                subsLink: res._links.subscriptions,
-                channelData: res
-              });
+              TwitchAPI.setUserId(res._id);
+              TwitchAPI.getStream()
+                .then((stream) => {
+                  this.setState({
+                    hasData: true,
+                    displayName: res.display_name,
+                    logo: res.logo,
+                    userId: res._id,
+                    channelData: res,
+                    isStreaming: (stream.stream ? true : false)
+                  });
+                });
             });
         }
       });
@@ -70,15 +69,15 @@ export default class DashBoard extends React.Component {
     if (this.state.hasData) {
       return(
         <div id="container">
-          <UserInfo token={this.state.token} channel={this.state.channelData}/>
-          <Follows token={this.state.token} link={this.state.followsLink} limit="10"/>
-          <Settings/>
+          <UserInfo channel={this.state.channelData}/>
+          <Follows limit="10"/>
         </div>
       )
     }
   }
 
   render(){
+    var statusClasses = "status " + (this.state.isStreaming ? "streaming" : "");
     return(
       <div id="dashboard">
         <header>
@@ -86,7 +85,7 @@ export default class DashBoard extends React.Component {
             <div className="displayname">{this.state.displayName}</div>
             <div className="icon-wrapper" onClick={this.showMenu}>
               <img className="icon" src={this.state.logo}/>
-              <div className="status"></div>
+              <div className={statusClasses}></div>
             </div>
           </div>
           <div id="user-menu">

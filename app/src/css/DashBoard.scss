@@ -33,13 +33,16 @@
           width: 8px;
           border-radius: 50%;
           border: 2px solid white;
+          &.streaming{
+            background-color: $twitch;
+          }
         }
       }
       .displayname{
         float: left;
         display: inline-block;
         padding: 0 10px;
-        font-weight: 600;
+        font-weight: 400;
       }
     }
     #user-menu{
