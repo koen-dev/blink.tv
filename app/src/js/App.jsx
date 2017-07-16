@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DOMinator from './DOMinator';
 import {fetchJson, sleep} from './Helper';
-import {LoginTwitch, LogoutTwitch} from './Twitch.jsx';
 import HomePage from './HomePage.jsx';
 import DashBoard from './DashBoard.jsx';
 
