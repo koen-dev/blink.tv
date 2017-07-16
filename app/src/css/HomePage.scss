@@ -1,6 +1,6 @@
 @import "variables";
 $footerHeight: 100px;
-$featuresHeight: 250px;
+$featuresHeight: 265px;
 
 #homepage{
   min-height: 100%;
@@ -82,6 +82,7 @@ $featuresHeight: 250px;
           p{
             padding: 0 1em;
             margin-bottom: 0;
+            font-weight: 300;
           }
         }
       }
