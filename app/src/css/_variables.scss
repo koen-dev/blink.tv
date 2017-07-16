@@ -1,6 +1,11 @@
 // Colors:
 $twitch: #6441A4;
 
+//Sizes
+$break-small: 768px;
+$break-medium: 992px;
+$break-large: 1200px;
+
 @-webkit-keyframes gradientbareffect {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}

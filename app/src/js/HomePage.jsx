@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {LoginTwitch} from './Twitch.jsx';
+import {LoginTwitch} from './HomePage/Twitch.jsx';
 
 import "../css/HomePage.scss";
 
@@ -9,18 +9,19 @@ export default class HomePage extends React.Component {
     super(props)
   }
 
+  componentDidMount(){
+  }
+
   render(){
     return(
       <div id="homepage">
-        <header>
-          <div className="logo-wrapper">
-            <div className="logo"></div>
+        <header id="header">
+          <div className="info">
+            Make your stream pop out in a blink of an eye.<br/>
+            <LoginTwitch/>
           </div>
-          <ul className="menu">
-            <li><LoginTwitch/></li>
-          </ul>
+          <div className="features"></div>
         </header>
-        <Spinner imageProvider="https://unsplash.it/1920/350"/>
         <div className="main"></div>
         <footer></footer>
       </div>

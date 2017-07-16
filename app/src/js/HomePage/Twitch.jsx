@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {fetchJson, sleep} from './Helper';
+import {fetchJson, sleep} from '../Helper';
 
 export class LoginTwitch extends React.Component{
   openPopup(){

@@ -41,6 +41,8 @@
     "mongoose": "4.11.1",
     "node-sass": "^4.5.3",
     "normalize.css": "^7.0.0",
+    "particles.js": "^2.0.0",
+    "particlesjs": "^2.0.2",
     "passport": "0.3.2",
     "passport-twitch": "1.0.3",
     "prop-types": "15.5.10",

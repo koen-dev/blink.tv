@@ -1,36 +1,46 @@
 @import "variables";
 $footerHeight: 100px;
+$featuresHeight: 250px;
 
 #homepage{
   min-height: 100%;
   position: relative;
 
   header{
+    position: relative;
+    margin-bottom: $featuresHeight / 2;
     width: 100%;
-    height: 40vh;
+    height: 65vh;
     text-align: center;
     background-color: $twitch;
-    padding: 0 0 1em 0;
-    .logo-wrapper{
-      padding: 3em 0 0 0;
-      width: 100%;
-      .logo{
-        border-radius: 50%;
-        background-color: #C3C8CC;
-        background-image: url(http://via.placeholder.com/100x100);
-        background-size: cover;
-        background-position: 50% 50%;
-        width: 100px;
-        height: 100px;
-        display: inline-block;
+    .info{
+      padding-bottom: $featuresHeight / 2;
+      color: #fff;
+      font-weight: 200;
+      font-size: 48px;
+      width: 50%;
+      margin-left: 10%;
+      text-align: left;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      @media screen and (max-width: $break-medium) {
+        width: 80%;
+      }
+      button{
+        margin-top: 10px;
       }
     }
-    ul{
-      list-style: none;
-      padding: 0;
-      li{
-
-      }
+    .features{
+      position: absolute;
+      @include dropshadow(2);
+      height: $featuresHeight;
+      width: 80%;
+      background-color: #fff;
+      border-radius: 3px;
+      bottom: - $featuresHeight / 2;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
