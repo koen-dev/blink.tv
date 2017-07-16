@@ -15,4 +15,9 @@ router.get("/logout", (req, res) => {
   res.json({"ErrorOccured": false});
 });
 
+router.get("/isloggedin", (req, res) => {
+  var isLoggedIn = req.isAuthenticated();
+  res.json({"isLoggedIn": isLoggedIn});
+});
+
 module.exports = router;

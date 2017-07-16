@@ -17,15 +17,14 @@ class App extends React.Component {
 
   componentDidMount(){
     window.success = () => {
-      this.setState({ isLoggedIn: true });
+      fetchJson("/auth/isloggedin", { credentials: 'same-origin' })
+        .then((res) => {
+          this.setState({ isLoggedIn: res.isLoggedIn });
+        });
     }
   }
 
   componentWillUnmount(){
-  }
-
-  login(){
-    this.setState({ isLoggedIn: true });
   }
 
   logout(){
