@@ -42,7 +42,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
-    //new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.bundle.js"})
+    new ExtractTextPlugin('styles.css')
   ]
 };
