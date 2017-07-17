@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchJson} from '../Helper';
+import {fetchJson, deepEqual} from '../Helper';
 import moment from 'moment';
 import TwitchAPI from '../TwitchApiHelper';
 
@@ -21,10 +21,12 @@ export default class Follows extends React.Component{
   updateFollowers(){
     TwitchAPI.getFollowers()
       .then((res) => {
-        this.setState({
-          total: res._total,
-          follows: res.follows
-        })
+        if (!deepEqual(this.state.follows, res.follows)) {
+          this.setState({
+            total: res._total,
+            follows: res.follows
+          })
+        }
       });
   }
 
